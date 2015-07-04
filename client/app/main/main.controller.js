@@ -4,7 +4,10 @@ angular.module('primasellertestApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
     $scope.awesomeThings = [];
 
-    $scope.user = "Pranav";
+    //username
+    $scope.username = "Pranav";
+    //seats required by the user
+    $scope.seats_required = 3;
 
     $scope.row_labels=['A','B','C','D','E','F','G','H','I','J'];
     $scope.rows=[];
@@ -12,15 +15,42 @@ angular.module('primasellertestApp')
     $scope.seat_hash = [];
     $scope.user_hash = [];
 
-    $scope.reserve = function(seat){
-      //console.log("wanna reserve "+seat.name);
-      if(seat.status=="selected"){
-        console.log("it's selected");
-      }else{
-        console.log("it's not selected");
-        seat.status = "selected";
+    $scope.seats_selected = [];
+
+
+    $scope.reserve = function(){
+      if($scope.seats_selected.length == $scope.seats_required){
+         $scope.user_hash[$scope.username] = $scope.user_hash[$scope.username] || []; 
+
+         for(var i=0; i<$scope.seats_selected.length; i++){
+            $scope.user_hash[$scope.username].push($scope.seats_selected[i]);   
+         }
+
+         for(var j=0; j<$scope.seats_selected.length; j++){
+            $scope.seat_hash[$scope.seats_selected[j].name] = $scope.username;
+         };
       }
-      $scope.seat_hash[seat.name] = $scope.user;
+      else{
+        console.log("select more seats");
+      }
+    }
+
+    
+    $scope.select = function(seat){
+    
+      if(seat.status == "selected"){
+        $scope.seats_selected.splice(_.indexOf($scope.seats_selected,seat),1);
+        seat.status = null;
+
+      }else{
+        if($scope.seats_selected.length<$scope.seats_required){
+          seat.status = "selected";
+          $scope.seats_selected.push(seat);
+        }
+      }
+
+      console.log($scope.seats_selected);
+
     }
 
     $scope.populate = function(row){

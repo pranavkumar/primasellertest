@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row">
-      <div style="min-height:600px;background-color:white;opacity:0.98">
+      <div style="min-height:600px;background-color:white;opacity:0.98;padding-bottom:8%" class="animated bounceIn">
         <br>
         <br>
         <div class="screen">
@@ -15,10 +15,14 @@
           <div ng-repeat="row in rows" style="overflow:auto;margin:2%">
             <ul class="list-inline" style="overflow:auto">
               <li ng-repeat="seat in row.seats" style="width:8.3333333%">
-                <button style="text-align:center" class="btn btn-success btn-sm seat animated bounceIn" ng-click="reserve(seat)">{{seat.name}}</button>
+                <button style="text-align:center" ng-class="{'btn btn-sm seat ' : true,'btn-success' : seat.status=='selected'}" ng-click="select(seat)">{{seat.name}}</button>
               </li>
             </ul>
           </div>
+            
+        </div>
+        <div style="text-align:center">
+          <button class="btn btn-lg btn-info" ng-click="reserve()">Confirm</button>
         </div>
       </div>
   </div>
