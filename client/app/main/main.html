@@ -1,0 +1,28 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+
+
+<div class="container">
+  <div class="row">
+      <div style="min-height:600px;background-color:white;opacity:0.98">
+        <br>
+        <br>
+        <div class="screen">
+          <p style="text-align:center;color:white"><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i></p>
+        </div>
+
+        <div>
+          <div ng-repeat="row in rows" style="overflow:auto;margin:2%">
+            <ul class="list-inline" style="overflow:auto">
+              <li ng-repeat="seat in row.seats" style="width:8.3333333%">
+                <button style="text-align:center" class="btn btn-success btn-sm seat animated bounceIn" ng-click="reserve(seat)">{{seat.name}}</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </div>
+
+ 
+</div>
+
