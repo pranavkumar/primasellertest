@@ -7,7 +7,8 @@ angular.module('primasellertestApp', [
   'ngRoute',
   'btford.socket-io',
   'ui.bootstrap',
-  'ngStorage'
+  'ngStorage',
+  'ngTable'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('primasellertestApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
+  .controller('MainCtrl', function ($scope, $http, socket, $location) {
     $scope.awesomeThings = [];
 
     $scope.loaded = false;
 
     //username
-    $scope.username = "Pranav";
+    $scope.username = "";
     //number seats required by the user
-    $scope.seats_required = 3;
+    $scope.seats_required;
 
     $scope.row_labels=['A','B','C','D','E','F','G','H','I','J'];
     $scope.rows=[];
@@ -23,6 +23,10 @@ angular.module('primasellertestApp')
     
 
     $scope.user_data;
+
+
+    $scope.selecting = false;
+    $scope.just_selected = false;
 
 
     //flattens hash to array
@@ -127,6 +131,10 @@ angular.module('primasellertestApp')
          $http.post('/api/reservations',{username:$scope.username,seats:$scope.seats_selected})
           .success(function(data,status,config,headers){
             console.log(data);
+            $scope.just_selected = true;
+            $scope.selecting = false;
+            $location.url('/confirm/'+data._id);
+
           })
 
       }

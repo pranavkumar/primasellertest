@@ -1,12 +1,30 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
-
-
-
-<div class="container">
+<div class="container" style="margin-top:4%">
   <div class="row">
+      <div style="text-align:center;margin-bottom:2%" ng-hide="selecting">
+        <form class="form-inline">
+          <div class="form-group">
+            <label for="exampleInputName2">Name</label>
+            <input type="text" ng-model="username" class="form-control" id="exampleInputName2" placeholder="John Doe">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail2">No. Of Seats</label>
+            <input type="text" ng-model="seats_required" class="form-control" id="exampleInputEmail2" placeholder="3">
+          </div>
+          <button type="submit" class="btn btn-info" ng-click="selecting=true">Start Selecting</button>
+        </form>
+      </div>
+
       <div style="min-height:600px;background-color:white;opacity:0.98;padding-bottom:8%" class="animated bounceIn">
         <br>
         <br>
+        <p ng-show="!selecting && !just_selected" style="text-align:center;font-size:18px">
+          Hi, fill up above form to start selecting seats...
+        </p>
+        <p ng-show="!selecting && just_selected" style="text-align:center;font-size:18px">
+          Hi, {{username}}. Congrats you just booked {{seats_required}} seats.
+        </p>
+
+        <div ng-show="selecting">
         <div class="screen">
           <p style="text-align:center;color:white"><i class="fa fa-circle"></i><i class="fa fa-circle"></i><i class="fa fa-circle"></i></p>
         </div>
@@ -19,18 +37,28 @@
               </li>
             </ul>
           </div>
-            
-        </div>
-        <div style="text-align:center">
-          <button class="btn btn-lg btn-info" ng-click="reserve()">Confirm</button>
-        </div>
-        <div style="padding:2%">
+        </div>    
         
-        <ul class="list-unstyled">
-          <li ng-repeat="ud in user_data">
-            <span>{{ud.key}}</span>&nbsp;&nbsp;<span>{{ud.value.toString()}}</span>
-          </li>
-        </ul>
+        <div style="text-align:center">
+          <button class="btn btn-lg btn-success" ng-click="reserve()">Confirm</button>
+        </div>
+        </div>
+
+        <div style="padding:2%">
+          <table ng-table class="table">
+             <tr ng-repeat="ud in user_data">
+               <td data-title="'Name'">
+                 {{ud.key}}
+               </td>
+               <td data-title="'No. Of Seats'">
+                 {{ud.value.length}}
+               </td>
+               <td data-title="'Seats'">
+                 {{ud.value.toString()}}
+               </td>
+             </tr> 
+          </table>  
+              
         
         </div>
       </div>
