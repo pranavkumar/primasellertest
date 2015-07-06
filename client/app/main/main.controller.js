@@ -117,6 +117,7 @@ angular.module('primasellertestApp')
       console.log($scope.len($scope.seat_hash));
       
       $scope.seats_left = parseInt($scope.seats_max - $scope.len($scope.seat_hash));
+
       console.log($scope.seats_left);
       
       $scope.populate();
@@ -125,6 +126,16 @@ angular.module('primasellertestApp')
 
 
     }
+
+    $scope.submit=function(form){
+      console.log("wanna submit");
+      if(form.$valid){
+        console.log("valid form");
+        $scope.selecting = true;
+      }else{
+        console.log("invalid form");
+      }
+    };
 
 
 
