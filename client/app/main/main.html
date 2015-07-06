@@ -1,14 +1,14 @@
 <div class="container" style="margin-top:4%">
   <div class="row">
       <div style="text-align:center;margin-bottom:2%" ng-hide="selecting">
-        <form class="form-inline">
+        <form class="form-inline" name="reservationForm">
           <div class="form-group">
             <label for="exampleInputName2">Name</label>
-            <input type="text" ng-model="username" class="form-control" id="exampleInputName2" placeholder="John Doe">
+            <input type="text" ng-model="username" class="form-control" id="exampleInputName2" placeholder="John Doe" name="username" required>
           </div>
           <div class="form-group">
             <label for="exampleInputEmail2">No. Of Seats</label>
-            <input type="text" ng-model="seats_required" class="form-control" id="exampleInputEmail2" placeholder="3">
+            <input type="number" ng-model="seats_required" class="form-control" id="exampleInputEmail2" placeholder="3" name="seats_required" min="1" max="{{seats_left}}" integer required>
           </div>
           <button type="submit" class="btn btn-info" ng-click="selecting=true">Start Selecting</button>
         </form>
@@ -17,6 +17,21 @@
       <div style="min-height:600px;background-color:white;opacity:0.98;padding-bottom:8%" class="animated bounceIn">
         <br>
         <br>
+
+        <div style="margin-left:8%;margin-right:8%">
+        
+        
+        <p class="text-danger bg-danger" ng-show="!reservationForm.username.$valid && reservationForm.username.$dirty">
+          Please enter valid username!!.
+        </p>
+        
+        <p class="text-danger bg-danger" ng-show="!reservationForm.seats_require.$valid && reservationForm.seats_required.$dirty">
+          Please enter valid no of seats required!!
+          
+        </p>
+        </div>
+
+
         <p ng-show="!selecting && !just_selected" style="text-align:center;font-size:18px">
           Hi, fill up above form to start selecting seats...
         </p>

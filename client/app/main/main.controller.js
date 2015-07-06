@@ -6,6 +6,9 @@ angular.module('primasellertestApp')
 
     $scope.loaded = false;
 
+    $scope.seats_max = 120;
+    $scope.seats_left;
+
     //username
     $scope.username = "";
     //number seats required by the user
@@ -27,6 +30,15 @@ angular.module('primasellertestApp')
 
     $scope.selecting = false;
     $scope.just_selected = false;
+
+
+    $scope.len=function(hash){
+      var l=0;
+      for(var key in hash){
+        l = l+1;
+      }
+      return l;
+    };
 
 
     //flattens hash to array
@@ -102,7 +114,10 @@ angular.module('primasellertestApp')
       }
 
       console.log($scope.user_hash);
-
+      console.log($scope.len($scope.seat_hash));
+      
+      $scope.seats_left = parseInt($scope.seats_max - $scope.len($scope.seat_hash));
+      console.log($scope.seats_left);
       
       $scope.populate();
 
