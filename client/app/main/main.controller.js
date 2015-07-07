@@ -206,6 +206,8 @@ angular.module('primasellertestApp')
     
       
 
-    $.backstretch('/assets/images/poster4.jpg');
+    $.backstretch([
+      '/assets/images/poster5.jpg',
+      ],{duration:4000});
 
   });
