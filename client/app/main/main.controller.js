@@ -94,7 +94,7 @@ angular.module('primasellertestApp')
 
 
     $scope.init=function(data){
-      
+      data = data.reverse();      
       for(var i=0;i<data.length;i++){
         console.log(data[i].username);
         $scope.user_hash[data[i].username] = $scope.user_hash[data[i].username] || [];
